@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Set;
 
 public class Dictionary {
-	Set<String> dizionario; 
+	Set<String> dizionario; //definizione fuori, creo il nuovo dentro
 	long start, end; 
 	long tempo=0; 
 	
