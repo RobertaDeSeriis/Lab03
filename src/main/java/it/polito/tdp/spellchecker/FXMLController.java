@@ -2,6 +2,8 @@ package it.polito.tdp.spellchecker;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import it.polito.tdp.spellchecker.model.Dictionary;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
@@ -10,6 +12,8 @@ import javafx.scene.control.TextArea;
 
 public class FXMLController {
 
+	Dictionary model= new Dictionary(); 
+	
     @FXML
     private ResourceBundle resources;
 
@@ -34,6 +38,18 @@ public class FXMLController {
     @FXML
     void check(ActionEvent event) {
 
+    	model.loadDictionary(cmbLanguage.getValue()); 
+    	//PROMPTTEST prende quello che hai scelto dal menu a tendina
+    	
+    	System.out.println(txtTesto.getText());
+    	
+    	txtCorr.setText(model.spellCheckText(txtTesto.getText()).toString());
+    	
+    	txtErrori.setText(""+model.spellCheckText(txtTesto.getText()).size()); 
+    	// aggiungi "" per trasformare l'int in una stringa
+    	
+    	txtTempo.setText(""+model.getTempo());
+    	
     }
 
     @FXML
@@ -41,6 +57,10 @@ public class FXMLController {
 
     }
 
+    public void setModel(Dictionary model) {
+    	this.model=model; 
+    }
+    
     @FXML
     void initialize() {
         assert cmbLanguage != null : "fx:id=\"cmbLanguage\" was not injected: check your FXML file 'Scene.fxml'.";
